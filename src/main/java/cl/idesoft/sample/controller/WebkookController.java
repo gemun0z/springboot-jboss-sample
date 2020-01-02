@@ -3,6 +3,7 @@ package cl.idesoft.sample.controller;
 import cl.idesoft.sample.dto.WebhookRequest;
 import cl.idesoft.sample.dto.WebhookResponse;
 import cl.idesoft.sample.dto.Webhooks;
+import cl.idesoft.sample.exception.WebhookNotFoundException;
 import cl.idesoft.sample.service.WebhookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -34,6 +35,8 @@ public class WebkookController {
         try {
             service.updateWebhook(id, request);
             return new ResponseEntity<Void>(HttpStatus.OK);
+        } catch (WebhookNotFoundException e) {
+            return new ResponseEntity<Void>(HttpStatus.NOT_FOUND);
         } catch (Exception e) {
             return new ResponseEntity<Void>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
@@ -46,6 +49,8 @@ public class WebkookController {
             Webhooks webhooks = new Webhooks();
             webhooks.setWebhooks(webhookResponses);
             return new ResponseEntity<Webhooks>(webhooks, HttpStatus.OK);
+        } catch (WebhookNotFoundException e) {
+            return new ResponseEntity<Webhooks>(HttpStatus.NOT_FOUND);
         } catch (Exception e) {
             return new ResponseEntity<Webhooks>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
@@ -56,6 +61,8 @@ public class WebkookController {
         try {
             WebhookResponse response = service.getWebhookById(id);
             return new ResponseEntity<WebhookResponse>(response, HttpStatus.OK);
+        } catch (WebhookNotFoundException e) {
+            return new ResponseEntity<WebhookResponse>(HttpStatus.NOT_FOUND);
         } catch (Exception e) {
             return new ResponseEntity<WebhookResponse>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
@@ -66,6 +73,8 @@ public class WebkookController {
         try {
             service.deleteWebhook(id);
             return new ResponseEntity<Void>(HttpStatus.OK);
+        } catch (WebhookNotFoundException e) {
+            return new ResponseEntity<Void>(HttpStatus.NOT_FOUND);
         } catch (Exception e) {
             return new ResponseEntity<Void>(HttpStatus.INTERNAL_SERVER_ERROR);
         }

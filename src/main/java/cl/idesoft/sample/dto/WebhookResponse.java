@@ -4,8 +4,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
-import java.util.Date;
-
 @ApiModel(value = "WebhookResponse")
 public class WebhookResponse {
 
@@ -19,7 +17,7 @@ public class WebhookResponse {
 
     @ApiModelProperty(name = "create_date", required = true, dataType = "string", position = 1)
     @JsonProperty(value = "create_date", required = true, index = 2)
-    private Date createDate;
+    private String createDate;
 
     public String getUrl() {
         return url;
@@ -37,11 +35,11 @@ public class WebhookResponse {
         this.createUser = createUser;
     }
 
-    public Date getCreateDate() {
+    public String getCreateDate() {
         return createDate;
     }
 
-    public void setCreateDate(Date createDate) {
+    public void setCreateDate(String createDate) {
         this.createDate = createDate;
     }
 
